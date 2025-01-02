@@ -13,6 +13,7 @@ public class ModService {
 
     private final ModrinthClient modrinthClient;
 
+    //TODO: Check if project exists
     public String getModrinthDownloads(String idOrSlug) {
         return formatNumber(modrinthClient.getProject(idOrSlug).getDownloads());
     }
