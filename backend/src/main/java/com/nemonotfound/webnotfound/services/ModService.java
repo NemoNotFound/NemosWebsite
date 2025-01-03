@@ -1,6 +1,7 @@
 package com.nemonotfound.webnotfound.services;
 
 import com.nemonotfound.webnotfound.clients.ModrinthClient;
+import com.nemonotfound.webnotfound.exceptions.ProjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,14 @@ public class ModService {
 
     private final ModrinthClient modrinthClient;
 
-    //TODO: Check if project exists
     public String getModrinthDownloads(String idOrSlug) {
-        return formatNumber(modrinthClient.getProject(idOrSlug).getDownloads());
+        var project = modrinthClient.getProject(idOrSlug);
+
+        if (project == null) {
+            throw new ProjectNotFoundException(idOrSlug);
+        }
+
+        return formatNumber(project.getDownloads());
     }
 
     private String formatNumber(int downloadCount) {
