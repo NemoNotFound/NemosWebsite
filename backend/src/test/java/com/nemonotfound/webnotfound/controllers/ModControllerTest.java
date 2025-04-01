@@ -46,4 +46,28 @@ class ModControllerTest {
         mvc.perform(get(String.format("/mods/%s/downloads/modrinth", MOD_ID)))
                 .andExpect(status().isInternalServerError());
     }
+
+    @Test
+    void getCurseForgeDownloads_returnsDownloads_isOk() throws Exception {
+        when(modService.getCurseForgeDownloads(MOD_ID)).thenReturn("23.3k");
+
+        mvc.perform(get(String.format("/mods/%s/downloads/curseforge", MOD_ID)))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void getCurseForgeDownloads_throwsProjectNotFoundException_isNotFound() throws Exception {
+        when(modService.getCurseForgeDownloads(MOD_ID)).thenThrow(ProjectNotFoundException.class);
+
+        mvc.perform(get(String.format("/mods/%s/downloads/curseforge", MOD_ID)))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void getCurseForgeDownloads_throwsException_isInternalServerError() throws Exception {
+        when(modService.getCurseForgeDownloads(MOD_ID)).thenThrow(RuntimeException.class);
+
+        mvc.perform(get(String.format("/mods/%s/downloads/curseforge", MOD_ID)))
+                .andExpect(status().isInternalServerError());
+    }
 }

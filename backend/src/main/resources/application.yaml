@@ -1,2 +1,8 @@
 modrinth:
   url: https://api.modrinth.com
+
+curse-forge:
+  url: https://api.curseforge.com
+  apiKey: apiKey
+  slugIdMap:
+    nemos-woodcutter: 914549

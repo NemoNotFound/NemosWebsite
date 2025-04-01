@@ -14,7 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureWireMock(port = 0)
 public class ModIntegrationTest {
 
-    private static final String MODRINTH_URL = "http://localhost:%s/mods/%s/downloads/modrinth";
+    private static final String BASE_URL = "http://localhost:%s/mods/%s/downloads/";
+    private static final String MODRINTH_URL = BASE_URL + "modrinth";
+    private static final String CURSEFORGE_URL = BASE_URL + "curseforge";
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -22,7 +24,7 @@ public class ModIntegrationTest {
     @LocalServerPort
     private int port;
 
-    private static final String MOD_ID = "modId";
+    private static final String MOD_ID = "nemos-woodcutter";
 
     @Test
     void getModrinthDownloads() {
@@ -35,6 +37,21 @@ public class ModIntegrationTest {
         );
 
         var downloads = restTemplate.getForObject(String.format(MODRINTH_URL, port, MOD_ID), String.class);
+
+        assertThat(downloads).isEqualTo("23.3K");
+    }
+
+    @Test
+    void getCurseForgeDownloads() {
+        stubFor(get(urlEqualTo("/v1/mods/" + 914549))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{ \"data\": {\"downloadCount\": 23300, \"title\": \"Mod Title\"}}")
+                )
+        );
+
+        var downloads = restTemplate.getForObject(String.format(CURSEFORGE_URL, port, MOD_ID), String.class);
 
         assertThat(downloads).isEqualTo("23.3K");
     }

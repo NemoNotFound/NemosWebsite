@@ -18,4 +18,9 @@ public class ModController {
     public String getModrinthDownloads(@PathVariable(value = "idOrSlug") String idOrSlug) {
         return modService.getModrinthDownloads(idOrSlug);
     }
+
+    @GetMapping(value = "/{slug}/downloads/curseforge")
+    public String getCurseForgeDownloads(@PathVariable(value = "slug") String slug) {
+        return modService.getCurseForgeDownloads(slug);
+    }
 }
