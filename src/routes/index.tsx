@@ -3,7 +3,7 @@ import { Component } from "solid-js";
 const Home: Component = () => {
   return (
     <main>
-      <div>index</div>
+      <div>{process.env.TEST}</div>
     </main>
   );
 };

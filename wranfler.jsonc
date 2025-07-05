@@ -1,0 +1,11 @@
+{
+  "name": "nemos-website",
+  "compatibility_date": "2025-07-05",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "pages_build_output_dir": "./dist",
+	"observability": {
+		"enabled": true
+	}
+}
