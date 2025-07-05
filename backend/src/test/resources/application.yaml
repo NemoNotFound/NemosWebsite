@@ -1,8 +1,0 @@
-modrinth:
-  url: http://localhost:${wiremock.server.port}
-
-curse-forge:
-  url: http://localhost:${wiremock.server.port}
-  apiKey: apiKey
-  slugIdMap:
-    nemos-woodcutter: 914549

@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+}
+
+/* @utility dark-theme {
+} */
+
+body {
+  /* @apply dark:dark-theme; */
+}

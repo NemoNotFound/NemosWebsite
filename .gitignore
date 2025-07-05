@@ -1,39 +1,28 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+dist
+.wrangler
+.output
+.vercel
+.netlify
+.vinxi
+app.config.timestamp_*.js
 
-### IntelliJ IDEA ###
-.idea
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
+# Environment
+.env
+.env*.local
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
 .project
-.settings
-.springBeans
-.sts4-cache
+.classpath
+*.launch
+.settings/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Temp
+gitignore
 
-### VS Code ###
-.vscode/
-
-### Mac OS ###
+# System Files
 .DS_Store
+Thumbs.db
