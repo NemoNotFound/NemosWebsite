@@ -1,9 +1,10 @@
+import { cloudflare } from "@cloudflare/vite-plugin";
 import { defineConfig } from "@solidjs/start/config";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), cloudflare()],
   },
 
   server: {
