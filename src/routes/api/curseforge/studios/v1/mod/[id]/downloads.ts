@@ -8,7 +8,7 @@ export const GET = async ({ params }: APIEvent) => {
 
   const headers = new Headers();
   headers.set("Access-Control-Allow-Origin", "*");
-  //headers.set('Access-Control-Allow-Methods', 'GE')
+  headers.set("Access-Control-Allow-Methods", "GET");
   headers.set("Access-Control-Allow-Headers", "Content-Type");
 
   const downloads = mod.downloads.toLocaleString("en-US", {
