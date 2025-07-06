@@ -43,10 +43,5 @@ export const GET = async ({ params }: APIEvent) => {
     // },
   };
 
-  return new Response(JSON.stringify(cf_mod), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  return new Response(JSON.stringify(cf_mod), { status: 200 });
 };

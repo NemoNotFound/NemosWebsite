@@ -6,17 +6,20 @@ export const GET = async ({ params }: APIEvent) => {
     if (res.ok) return res.json();
   });
 
-  const headers = new Headers();
-  headers.set("Access-Control-Allow-Origin", "*");
-  headers.set("Access-Control-Allow-Methods", "GET");
-  headers.set("Access-Control-Allow-Headers", "Content-Type");
+  /*
+    i don't know how this maths works, but i know it does.
+  */
+  const floor_amount =
+    1000 ** Math.floor(mod.downloads.toString().length / 3) / 100;
+  const floored_downloads =
+    Math.floor(mod.downloads / floor_amount) * floor_amount;
 
-  const downloads = mod.downloads.toLocaleString("en-US", {
+  const downloads = floored_downloads.toLocaleString("en-US", {
     notation: "compact",
     compactDisplay: "short",
     minimumFractionDigits: 0,
-    maximumFractionDigits: 1,
+    maximumFractionDigits: 2,
   });
 
-  return new Response(JSON.stringify(downloads));
+  return new Response(JSON.stringify(downloads), { status: 200 });
 };
