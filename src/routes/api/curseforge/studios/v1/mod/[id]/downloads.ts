@@ -3,11 +3,11 @@ import { CFMod } from ".";
 
 export const GET = async ({ params }: APIEvent) => {
   const modId = Number.parseInt(params.id);
-  const mod: CFMod = await fetch(
-    `https://devnemo.com/api/curseforge/studios/v1/mod/${modId}`
-  ).then((res) => {
-    if (res.ok) return res.json();
-  });
+  const mod: CFMod = await fetch(`api/curseforge/studios/v1/mod/${modId}`).then(
+    (res) => {
+      if (res.ok) return res.json();
+    }
+  );
 
   return mod.downloads.toLocaleString("en-US", {
     notation: "compact",
