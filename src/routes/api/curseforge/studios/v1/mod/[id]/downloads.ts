@@ -2,8 +2,9 @@ import type { APIEvent } from "@solidjs/start/server";
 import { CFMod } from "../[id]";
 
 export const GET = async ({ params }: APIEvent) => {
+  const modId = Number.parseInt(params.id);
   const mod: CFMod = await fetch(
-    `/api/curseforge/studios/v1/mod/${params.id}`
+    `/api/curseforge/studios/v1/mod/${modId}`
   ).then((response) => {
     if (response.ok) return response.json();
   });
