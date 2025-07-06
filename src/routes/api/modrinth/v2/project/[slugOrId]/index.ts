@@ -16,7 +16,7 @@ export interface ModrinthProject {
 
 export const GET = async ({ params }: APIEvent) => {
   const response = await fetch(
-    `https://api.modrinth.com/v2/project/${params.slug}`,
+    `https://api.modrinth.com/v2/project/${params.slugOrId}`,
     {
       method: "GET",
     }
