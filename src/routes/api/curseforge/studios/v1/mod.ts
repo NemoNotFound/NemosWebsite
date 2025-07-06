@@ -11,3 +11,7 @@ export type CFMod = {
     wiki: string;
   };
 };
+
+export const GET = async () => {
+  return {};
+};
