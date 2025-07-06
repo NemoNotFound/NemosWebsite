@@ -9,6 +9,7 @@
         "@solidjs/start": "^1.1.0",
         "solid-js": "^1.9.5",
         "vinxi": "^0.5.7",
+        "wrangler": "^4.23.0",
       },
       "devDependencies": {
         "@tailwindcss/vite": "^4.0.7",

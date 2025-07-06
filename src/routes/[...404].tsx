@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
 
-const NotFount: Component = () => {
+const NotFound: Component = () => {
   return (
     <main>
       <div>404</div>
@@ -8,4 +8,4 @@ const NotFount: Component = () => {
   );
 };
 
-export default NotFount;
+export default NotFound;

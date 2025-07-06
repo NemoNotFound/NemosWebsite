@@ -1,7 +1,7 @@
 /// <reference types="@solidjs/start/env" />
 
-declare namespace SolidJS {
-  interface ProcessEnv {
-    readonly TEST: string;
-  }
-}
+declare var process: {
+  env: {
+    CF_API_KEY: string;
+  };
+};
