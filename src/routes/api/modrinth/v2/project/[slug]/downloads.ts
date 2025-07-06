@@ -1,5 +1,6 @@
 import type { APIEvent } from "@solidjs/start/server";
 import { GET as IndexGET, ModrinthProject } from ".";
+import { ftsd } from "~/util/maths";
 
 export const GET = async ({ params }: APIEvent) => {
   const mod: ModrinthProject = await IndexGET({ params } as APIEvent).then(
@@ -8,15 +9,7 @@ export const GET = async ({ params }: APIEvent) => {
     }
   );
 
-  /*
-    i don't know how this maths works, but i know it does.
-  */
-  const floor_amount =
-    1000 ** Math.floor(mod.downloads.toString().length / 3) / 100;
-  const floored_downloads =
-    Math.floor(mod.downloads / floor_amount) * floor_amount;
-
-  const downloads = floored_downloads.toLocaleString("en-US", {
+  const downloads = ftsd(mod.downloads, 3).toLocaleString("en-US", {
     notation: "compact",
     compactDisplay: "short",
     minimumFractionDigits: 0,
