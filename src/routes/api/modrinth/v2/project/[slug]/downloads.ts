@@ -1,6 +1,7 @@
 import type { APIEvent } from "@solidjs/start/server";
 import { GET as IndexGET, ModrinthProject } from ".";
-import { ftsd } from "~/util/maths";
+import { floorToSignificantDigits } from "~/util/maths";
+import { headers } from "~/util/default-headers";
 
 export const GET = async ({ params }: APIEvent) => {
   const mod: ModrinthProject = await IndexGET({ params } as APIEvent).then(
@@ -9,20 +10,18 @@ export const GET = async ({ params }: APIEvent) => {
     }
   );
 
-  const downloads = ftsd(mod.downloads, 3).toLocaleString("en-US", {
-    notation: "compact",
-    compactDisplay: "short",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-  });
-
-  const headers = new Headers();
-  headers.set("Access-Control-Allow-Origin", "*");
-  headers.set("Access-Control-Allow-Methods", "GET, PUT, DELETE, OPTIONS");
-  headers.set("Access-Control-Allow-Headers", "Content-Type");
+  const downloads = floorToSignificantDigits(mod.downloads, 3).toLocaleString(
+    "en-US",
+    {
+      notation: "compact",
+      compactDisplay: "short",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    }
+  );
 
   return new Response(JSON.stringify(downloads), {
     status: 200,
-    headers: headers,
+    headers: headers(),
   });
 };

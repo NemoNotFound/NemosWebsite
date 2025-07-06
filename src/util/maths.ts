@@ -1,7 +1,7 @@
-/*
-  floor to significant digits
-*/
-export const ftsd = (number: number, sigDigits: number): number => {
+export const floorToSignificantDigits = (
+  number: number,
+  sigDigits: number
+): number => {
   if (number === 0) return 0;
 
   const digitCount = Math.abs(number).toString().length;
