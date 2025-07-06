@@ -13,7 +13,7 @@ export type CFMod = {
 };
 
 export const GET = async () => {
-    const modId = 1;
+    const modId = "nemos-inventory-sorting";
     const apiKey = process.env.CF_API_KEY;
 
     try {
