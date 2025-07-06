@@ -47,7 +47,7 @@ export const GET = async ({ params }: APIEvent) => {
       // },
     };
 
-    return new Response(JSON.stringify(cf_mod), {
+    return new Response(downloads, {
       status: 200,
       headers: {
         "Content-Type": "application/json",
