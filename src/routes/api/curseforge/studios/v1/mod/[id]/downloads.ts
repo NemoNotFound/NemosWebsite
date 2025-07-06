@@ -6,10 +6,10 @@ export const GET = async ({ params }: APIEvent) => {
     if (res.ok) return res.json();
   });
 
-  //const headers = new Headers();
-  //headers.set('Access-Control-Allow-Origin', '*')
+  const headers = new Headers();
+  headers.set("Access-Control-Allow-Origin", "*");
   //headers.set('Access-Control-Allow-Methods', 'GE')
-  //headers.set('Access-Control-Allow-Headers', 'Content-Type')
+  headers.set("Access-Control-Allow-Headers", "Content-Type");
 
   const downloads = mod.downloads.toLocaleString("en-US", {
     notation: "compact",
