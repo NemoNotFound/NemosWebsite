@@ -5,8 +5,8 @@ export const GET = async ({ params }: APIEvent) => {
   const modId = Number.parseInt(params.id);
   const mod: CFMod = await fetch(
     `https://devnemo.com/api/curseforge/studios/v1/mod/${modId}`
-  ).then((response) => {
-    if (response.ok) return response.json();
+  ).then((res) => {
+    if (res.ok) return res.json();
   });
 
   return mod.downloads.toLocaleString("en-US", {
