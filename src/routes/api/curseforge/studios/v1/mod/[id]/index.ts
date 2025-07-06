@@ -43,10 +43,5 @@ export const GET = async ({ params }: APIEvent) => {
     // },
   };
 
-  const headers = new Headers();
-  headers.set("Access-Control-Allow-Origin", "*");
-  headers.set("Access-Control-Allow-Methods", "GET, PUT, DELETE, OPTIONS");
-  headers.set("Access-Control-Allow-Headers", "Content-Type");
-
-  return new Response(JSON.stringify(cf_mod), { headers });
+  return new Response(JSON.stringify(cf_mod), { status: 200 });
 };
