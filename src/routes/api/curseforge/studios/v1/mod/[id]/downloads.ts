@@ -6,10 +6,17 @@ export const GET = async ({ params }: APIEvent) => {
     if (res.ok) return res.json();
   });
 
-  return mod.downloads.toLocaleString("en-US", {
+  //const headers = new Headers();
+  //headers.set('Access-Control-Allow-Origin', '*')
+  //headers.set('Access-Control-Allow-Methods', 'GE')
+  //headers.set('Access-Control-Allow-Headers', 'Content-Type')
+
+  const downloads = mod.downloads.toLocaleString("en-US", {
     notation: "compact",
     compactDisplay: "short",
     minimumFractionDigits: 0,
     maximumFractionDigits: 1,
   });
+
+  return new Response(JSON.stringify(downloads));
 };
