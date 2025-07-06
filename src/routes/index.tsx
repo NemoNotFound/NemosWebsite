@@ -7,7 +7,7 @@ const Home: Component = () => {
 
   createEffect(async () => {
     const mod: CFMod = await fetch(
-      `/api/curseforge/studios/v1/mod/${modId}`
+      `/api/curseforge/studios/v1/mod/${modId}/downloads`
     ).then((res) => {
       if (res.ok) return res.json();
     });
@@ -17,14 +17,7 @@ const Home: Component = () => {
 
   return (
     <main>
-      <div>
-        {downloads().toLocaleString("en-US", {
-          notation: "compact",
-          compactDisplay: "short",
-          minimumFractionDigits: 1,
-          maximumFractionDigits: 1,
-        })}
-      </div>
+      <div>{downloads()}</div>
     </main>
   );
 };
