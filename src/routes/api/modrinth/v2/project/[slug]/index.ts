@@ -15,11 +15,12 @@ export interface ModrinthProject {
 }
 
 export const GET = async ({ params }: APIEvent) => {
-  const slug = Number.parseInt(params.slug);
-
-  const response = await fetch(`https://api.modrinth.com/v2/project/${slug}`, {
-    method: "GET",
-  }).then((res) => {
+  const response = await fetch(
+    `https://api.modrinth.com/v2/project/${params.slug}`,
+    {
+      method: "GET",
+    }
+  ).then((res) => {
     if (res.ok) return res.json();
   });
 
