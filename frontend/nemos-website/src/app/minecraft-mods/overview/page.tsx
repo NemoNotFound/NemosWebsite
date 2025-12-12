@@ -1,7 +1,9 @@
 import Link from "next/link";
 import {floorToSignificantDigits} from "@/util/maths";
+import MinecraftProjectCard from "@/components/MinecraftCard";
+import {Project} from "@/types/Project";
 
-const projects = [
+const projects: Project[] = [
     {
         title: "Nemo's Inventory Sorting",
         slug: "nemos-inventory-sorting",
@@ -34,13 +36,13 @@ const projects = [
 
 export default async function Overview() {
     const curseForgeDownloads = await fetchDownloadsMap(
-        (project) => project.curseForgeId,
-        (project) => fetchCurseForgeDownloads(project.curseForgeId)
+        (project: Project) => project.curseForgeId,
+        (project: Project) => fetchCurseForgeDownloads(project.curseForgeId)
     );
 
     const modrinthDownloads = await fetchDownloadsMap(
-        (project) => project.slug,
-        (project) => fetchModrinthDownloads((project.slug)),
+        (project: Project) => project.slug,
+        (project: Project) => fetchModrinthDownloads((project.slug)),
     );
 
     //TODO: Add projects with downloads
@@ -69,10 +71,11 @@ export default async function Overview() {
             <div>
                 {
                     projects.map(project => (
-                        <MinecraftProjectCard key={project.slug} title={project.title}
+                        <MinecraftProjectCard key={project.slug} title={project.title} slug={project.slug}
                                               imagePath={project.imagePath} description={project.description}
                                               curseForgeDownloads={curseForgeDownloads[project.curseForgeId]}
-                                              modrinthDownloads={modrinthDownloads[project.slug]}></MinecraftProjectCard>
+                                              modrinthDownloads={modrinthDownloads[project.slug]}>
+                        </MinecraftProjectCard>
                     ))
                 }
             </div>
@@ -80,12 +83,24 @@ export default async function Overview() {
     )
 }
 
-async function fetchDownloadsMap(keyFunction, fetchFunction) {
+async function fetchDownloadsMap(keyFunction: (project: Project) => string, fetchFunction: (project: Project) => Promise<number>) {
     const downloadsArray = await Promise.all(
         projects.map(async (project) => {
             const downloads = await fetchFunction(project);
 
-            return {[keyFunction(project)]: downloads};
+            function formatDownloads() {
+                return floorToSignificantDigits(downloads, 3).toLocaleString(
+                    "en-US",
+                    {
+                        notation: "compact",
+                        compactDisplay: "short",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2,
+                    }
+                );
+            }
+
+            return {[keyFunction(project)]: formatDownloads()};
         })
     );
 
@@ -96,12 +111,12 @@ async function fetchDownloadsMap(keyFunction, fetchFunction) {
 }
 
 //TODO: Change url
-async function fetchCurseForgeDownloads(curseForgeId: string): Promise<string> {
+async function fetchCurseForgeDownloads(curseForgeId: string): Promise<number> {
     return fetchDownloads(`https://devnemo.com/api/curseforge/studios/v1/mod/${curseForgeId}`)
 }
 
 //TODO: Change url
-async function fetchModrinthDownloads(slug: string): Promise<string> {
+async function fetchModrinthDownloads(slug: string): Promise<number> {
     return fetchDownloads(`https://devnemo.com/api/modrinth/v2/project/${slug}`)
 }
 
@@ -110,50 +125,4 @@ async function fetchDownloads(url: string) {
     const data = await response.json();
 
     return data.downloads
-}
-
-function MinecraftProjectCard({title, imagePath, description, curseForgeDownloads, modrinthDownloads}: {title: string; imagePath: string, description: string, curseForgeDownloads: number, modrinthDownloads: number}) {
-    return (
-        <div>
-            <div>
-                <div>
-                    <img alt={title}
-                         src={`https://github.com/NemoNotFound/NemoNotFound/blob/master/resources/minecraft_projects/icons/${imagePath}?raw=true`}/>
-                </div>
-                <h1>{title}</h1>
-                <p>{description}</p>
-            </div>
-            <div>
-                <div>
-                    <Downloads title="CurseForge" downloads={curseForgeDownloads}></Downloads>
-                    <Downloads title="Modrinth" downloads={modrinthDownloads}></Downloads>
-                </div>
-                <div>
-                    <a>Read More</a>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-//TODO: Put format logic into fetch
-function Downloads({title, downloads}: { title: string, downloads: number }) {
-    function formatDownloads() {
-        return floorToSignificantDigits(downloads, 3).toLocaleString(
-            "en-US",
-            {
-                notation: "compact",
-                compactDisplay: "short",
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 2,
-            }
-        );
-    }
-
-    return (
-        <div>
-            <img alt={title}/>
-            <p>{formatDownloads()}</p>
-        </div>
-    )
 }
