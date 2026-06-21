@@ -1,4 +1,4 @@
-import Downloads from "@/components/Downloads";
+import {CurseForgeDownloads, ModrinthDownloads} from "@/components/Downloads";
 
 export default function MinecraftProjectCard({
                                                  title,
@@ -35,8 +35,8 @@ export default function MinecraftProjectCard({
             </div>
 
             <div className="flex justify-evenly mb-4">
-                <Downloads title="CurseForge" downloadLink={curseForgeDownloadLink} downloads={curseForgeDownloads}></Downloads>
-                <Downloads title="Modrinth" downloadLink={modrinthDownloadLink} downloads={modrinthDownloads}></Downloads>
+                <CurseForgeDownloads downloadLink={curseForgeDownloadLink} downloads={curseForgeDownloads}></CurseForgeDownloads>
+                <ModrinthDownloads downloadLink={modrinthDownloadLink} downloads={modrinthDownloads}></ModrinthDownloads>
             </div>
 
             <div className="read-more-button bg-accent text-center">

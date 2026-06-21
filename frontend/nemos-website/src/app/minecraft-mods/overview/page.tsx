@@ -1,7 +1,7 @@
-import Link from "next/link";
 import {floorToSignificantDigits} from "@/util/maths";
 import MinecraftProjectCard from "@/components/MinecraftCard";
 import {Project} from "@/types/Project";
+import NavigationBar from "@/components/NavigationBar";
 
 const projects: Project[] = [
     {
@@ -49,25 +49,7 @@ export default async function Overview() {
 
     return (
         <>
-            <nav className="flex justify-between items-center p-6 border-b">
-                <div>
-                    <Link href="/">
-                        <img alt="Homepage"/>
-                    </Link>
-                </div>
-                <div className="flex gap-10">
-                    <div className="relative group">
-                        <button>
-                            Projects
-                        </button>
-                        <div className="absolute hidden group-hover:block border p-2 rounded bg-background">
-                            <a className="block nav-link">Minecraft Projects</a>
-                        </div>
-                    </div>
-                    <a className="nav-link">About</a>
-                    <a className="nav-link">Contact</a>
-                </div>
-            </nav>
+            <NavigationBar></NavigationBar>
             <div>
                 {
                     projects.map(project => (

@@ -5,7 +5,8 @@
     --primary: #542960;
     --secondary: #74258D;
     --accent: #C172DA;
-    --text: #151415
+    --text: #151415;
+    --text-highlight: #eb622b;
 }
 
 @theme inline {
@@ -14,8 +15,6 @@
     --color-secondary: var(--secondary);
     --color-accent: var(--accent);
     --color-text: var(--text);
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,7 +31,7 @@ body {
     background: var(--background);
     color: var(--text);
     border-color: var(--primary);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Pixelify Sans, Arial, Helvetica, sans-serif;
 }
 
 .nav-link {
@@ -40,7 +39,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--primary)
+    color: var(--text-highlight)
 }
 
 .minecraft-project-card {
@@ -53,7 +52,7 @@ body {
     height: 485px;
 }
 
-.minecraft-platform-icon:hover {
+.scaling:hover {
     scale: 1.2;
     transition: scale .2s ease;
 }
