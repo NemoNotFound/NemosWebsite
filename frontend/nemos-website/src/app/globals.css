@@ -6,7 +6,7 @@
     --secondary: #74258D;
     --accent: #C172DA;
     --text: #151415;
-    --text-highlight: #eb622b;
+    --primary-orange: #eb622b;
 }
 
 @theme inline {
@@ -27,6 +27,26 @@
     }
 }
 
+* {
+    scrollbar-color: var(--primary-orange) var(--background);
+}
+
+nav {
+    border-bottom: 1px solid var(--primary-orange);
+}
+
+.page {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: var(--primary-orange)
+}
+
 body {
     background: var(--background);
     color: var(--text);
@@ -35,21 +55,31 @@ body {
 }
 
 .nav-link {
+    font-size: 24px;
     transition: color 0.2s;
 }
 
 .nav-link:hover {
-    color: var(--text-highlight)
+    color: var(--primary-orange)
 }
 
 .minecraft-project-card {
-    background-color: var(--primary);
-    border: 4px solid hsl(0, 0%, 9%);
+    background-color: var(--background);
+    border: 4px solid var(--primary-orange);
     border-radius: 15px;
-    padding: 20px;
+    padding: 15px;
     margin: 5px;
     width: 300px;
-    height: 485px;
+    height: fit-content;
+}
+
+.minecraft-project-card-component {
+    background-color: var(--primary-orange);
+    border: 4px solid var(--primary-orange);
+    border-radius: 10px;
+    width: 100%;
+    color: black;
+    padding: 5px;
 }
 
 .scaling:hover {
@@ -58,9 +88,11 @@ body {
 }
 
 .read-more-button {
+    color: white;
+    background-color: black;
     border-radius: 10px;
 }
 
 .read-more-button:hover {
-    transition: scale .2s ease;
+    transition: background-color .2s ease;
 }

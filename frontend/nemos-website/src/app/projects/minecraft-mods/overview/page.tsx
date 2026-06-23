@@ -8,28 +8,24 @@ const projects: Project[] = [
         title: "Nemo's Inventory Sorting",
         slug: "nemos-inventory-sorting",
         imagePath: "png/nemos_inventory_sorting.png",
-        description: "Automatically sort your inventory with just a button!",
         curseForgeId: "1148320",
     },
     {
         title: "Nemo's Backpacks",
         slug: "nemos-backpacks",
         imagePath: "png/nemos_backpacks.png",
-        description: "Add colorful backpacks to Minecraft!",
         curseForgeId: "1344643",
     },
     {
         title: "Nemo's Woodcutter",
         slug: "nemos-woodcutter",
         imagePath: "gif/nemos_woodcutter.gif",
-        description: "Just like a Stonecutter, but for wood!",
         curseForgeId: "914549",
     },
     {
         title: "Nemo's Blooming Blossom",
         slug: "nemos-blooming-blossom",
         imagePath: "png/nemos_blooming_blossom.png",
-        description: "Generate pink petals when spawning a cherry tree!",
         curseForgeId: "907318",
     }
 ]
@@ -49,17 +45,24 @@ export default async function Overview() {
 
     return (
         <>
-            <NavigationBar></NavigationBar>
-            <div>
-                {
-                    projects.map(project => (
-                        <MinecraftProjectCard key={project.slug} title={project.title} slug={project.slug}
-                                              imagePath={project.imagePath} description={project.description}
-                                              curseForgeDownloads={curseForgeDownloads[project.curseForgeId]}
-                                              modrinthDownloads={modrinthDownloads[project.slug]}>
-                        </MinecraftProjectCard>
-                    ))
-                }
+            <NavigationBar/>
+            <div className="page">
+                <h1>Minecraft Projects</h1>
+                <div className="grid grid-cols-3 gap-5 w-fit mx-auto">
+                    {
+                        projects.map(project => (
+                            <MinecraftProjectCard
+                                key={project.slug}
+                                title={project.title}
+                                slug={project.slug}
+                                imagePath={project.imagePath}
+                                curseForgeDownloads={curseForgeDownloads[project.curseForgeId]}
+                                modrinthDownloads={modrinthDownloads[project.slug]}
+                            >
+                            </MinecraftProjectCard>
+                        ))
+                    }
+                </div>
             </div>
         </>
     )

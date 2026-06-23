@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {Pixelify_Sans} from "next/font/google";
 import "./globals.css";
+import React from "react";
 
 const pixelifySans = Pixelify_Sans({
     variable: "--font-pixelify-sans",
