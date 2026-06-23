@@ -37,7 +37,7 @@ export default function NavigationBar() {
                     {modrinthIcon()}
                 </Link>
                 <Link className={iconLinkClassName} href="https://www.curseforge.com/members/nemonotfound/projects" target="_blank">
-                    {curseForgeIcon("#eb622b")}
+                    {curseForgeIcon()}
                 </Link>
                 <button>Display Mode</button>
             </div>

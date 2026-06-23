@@ -4,7 +4,7 @@ export function CurseForgeDownloads({downloadLink, downloads}: {downloadLink: st
     return (
         <div className="flex items-center gap-2">
             <a href={downloadLink} target="_blank" rel="noopener noreferrer">
-                {curseForgeIcon("black")}
+                {curseForgeIcon()}
             </a>
             <p className="font-bold">{downloads}</p>
         </div>
