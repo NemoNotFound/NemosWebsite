@@ -5,23 +5,23 @@ export default function NavigationBar() {
     const iconLinkClassName = "inline-flex h-fit w-fit items-center justify-center";
 
     return (
-        <nav className="flex justify-around p-6 border-b mb-30">
+        <nav className="flex justify-around p-6 border-b mb-10">
             <div className="flex w-full justify-start items-center">
                 <Link className={iconLinkClassName} href="/">
                     {logo()}
                 </Link>
             </div>
             <div className="flex gap-10 w-full justify-center items-center">
-                <Link className="nav-link" href="/">Home</Link>
+                <Link className="text-2xl link" href="/">Home</Link>
                 <div className="relative group">
-                    <Link className="nav-link" href={"/projects/overview"}>Projects</Link>
+                    <Link className="text-2xl" href={"/projects/overview"}>Projects</Link>
                     <div className="absolute hidden group-hover:block border p-2 rounded bg-background">
-                        <Link className="block nav-link" href={"/projects/minecraft-mods/overview"}>Minecraft Projects</Link>
+                        <Link className="block text-2xl" href={"/projects/minecraft-mods/overview"}>Minecraft Projects</Link>
                     </div>
                 </div>
-                <Link className="nav-link" href="https://wiki.nemonotfound.com" target="_blank">Wiki</Link>
-                <Link className="nav-link" href="/about">About</Link>
-                <Link className="nav-link" href="/contact">Contact</Link>
+                <Link className="text-2xl link" href="https://wiki.nemonotfound.com" target="_blank">Wiki</Link>
+                <Link className="text-2xl link" href="/about">About</Link>
+                <Link className="text-2xl link" href="/contact">Contact</Link>
             </div>
             <div className="flex gap-5 w-full justify-end items-center">
                 <Link className={iconLinkClassName} href="https://github.com/NemoNotFound" target="_blank">

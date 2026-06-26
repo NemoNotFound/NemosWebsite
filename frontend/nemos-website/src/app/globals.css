@@ -44,7 +44,8 @@ h1 {
     font-size: 50px;
     font-weight: bold;
     margin-bottom: 40px;
-    color: var(--primary-orange)
+    color: var(--primary-orange);
+    text-align: center;
 }
 
 body {
@@ -54,12 +55,11 @@ body {
     font-family: Pixelify Sans, Arial, Helvetica, sans-serif;
 }
 
-.nav-link {
-    font-size: 24px;
+.link {
     transition: color 0.2s;
 }
 
-.nav-link:hover {
+.link:hover {
     color: var(--primary-orange)
 }
 
