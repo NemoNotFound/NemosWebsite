@@ -27,16 +27,131 @@ const projects: Project[] = [
         slug: "nemos-blooming-blossom",
         imagePath: "png/nemos_blooming_blossom.png",
         curseForgeId: "907318",
+    },
+    {
+        title: "Nemo's Creatures",
+        slug: "nemos-creatures",
+        imagePath: "png/nemos_creatures.png",
+        curseForgeId: "936231"
+    },
+    {
+        title: "Nemo's Night Progression",
+        slug: "nemos-night-progression",
+        imagePath: "png/nemos_night_progression.png",
+        curseForgeId: "1294916"
+    },
+    {
+        title: "Nemo's Enchantments",
+        slug: "nemos-enchantments",
+        imagePath: "png/nemos_enchantments.png",
+        curseForgeId: "1088345"
+    },
+    {
+        title: "Nemo's Vertical Slabs",
+        slug: "nemos-vertical-slabs",
+        imagePath: "png/nemos_vertical_slabs.png",
+        curseForgeId: "1095780",
+    },
+    {
+        title: "Nemo's Upgrade Templates",
+        slug: "nemos-upgrade-templates",
+        imagePath: "png/nemos_upgrade_templates.png",
+        curseForgeId: "1483085",
+    },
+    {
+        title: "Nemo's Campfires",
+        slug: "nemos-campfires",
+        imagePath: "png/nemos_campfires.png",
+        curseForgeId: "1105740"
+    },
+    {
+        title: "Nemo's Mending",
+        slug: "nemos-mending",
+        imagePath: "png/nemos_mending.png",
+        curseForgeId: "988402"
+    },
+    {
+        title: "Nemo's Mossy Blocks",
+        slug: "nemos-mossy-blocks",
+        imagePath: "png/nemos_mossy_blocks.png",
+        curseForgeId: "1008561"
+    },
+    {
+        title: "Nemo's Progression",
+        slug: "nemos-progression",
+        imagePath: "png/nemos_progression.png",
+        curseForgeId: "1523924",
+    },
+    {
+        title: "Nemo's Firework Keybinding",
+        slug: "nemos-firework-keybinding",
+        imagePath: "png/nemos_firework_keybinding.png",
+        curseForgeId: "1058074",
+    },
+    {
+        title: "Nemo's Paintings",
+        slug: "nemos-paintings",
+        imagePath: "png/nemos_paintings.png",
+        curseForgeId: "1085016",
+    },
+    {
+        title: "Nemo's Quartz",
+        slug: "nemos-quartz",
+        imagePath: "png/nemos_quartz.png",
+        curseForgeId: "1389652",
     }
 ]
 
+const abandonedProjects: Project[] = [
+    {
+        title: "Nemo's Carpentry",
+        slug: "nemos-carpentry",
+        imagePath: "png/nemos_carpentry.png",
+        curseForgeId: "928372"
+    },
+    {
+        title: "Nemo's Farming",
+        slug: "nemos-farming",
+        imagePath: "png/nemos_farming.png",
+        curseForgeId: "1076299"
+    },
+    {
+        title: "Nemo's Ambience",
+        slug: "nemos-ambience",
+        imagePath: "png/nemos_ambience.png",
+        curseForgeId: "917245",
+    },
+    {
+        title: "Nemo's Mossy Vertical Slabs",
+        slug: "nemos-mossy-vertical-slabs",
+        imagePath: "png/nemos_mossy_vertical_slabs.png",
+        curseForgeId: "1113090",
+    },
+    {
+        title: "Nemo's Copper",
+        slug: "nemos-copper",
+        imagePath: "png/nemos_copper.png",
+        curseForgeId: "1143923",
+    },
+    {
+        title: "Nemo's Tags",
+        slug: "nemos-tags",
+        imagePath: "png/nemos_tags.png",
+        curseForgeId: "1251621",
+    },
+]
+
 export default async function Overview() {
+    const allProjects = [...projects, ...abandonedProjects];
+
     const curseForgeDownloads = await fetchDownloadsMap(
+        allProjects,
         (project: Project) => project.curseForgeId,
         (project: Project) => fetchCurseForgeDownloads(project.curseForgeId)
     );
 
     const modrinthDownloads = await fetchDownloadsMap(
+        allProjects,
         (project: Project) => project.slug,
         (project: Project) => fetchModrinthDownloads((project.slug)),
     );
@@ -63,14 +178,31 @@ export default async function Overview() {
                         ))
                     }
                 </div>
+
+                <h2 className="abandoned-projects-title">Abandoned Projects</h2>
+                <div className="abandoned-projects grid grid-cols-3 gap-5 w-fit mx-auto">
+                    {
+                        abandonedProjects.map(project => (
+                            <MinecraftProjectCard
+                                key={project.slug}
+                                title={project.title}
+                                slug={project.slug}
+                                imagePath={project.imagePath}
+                                curseForgeDownloads={curseForgeDownloads[project.curseForgeId]}
+                                modrinthDownloads={modrinthDownloads[project.slug]}
+                            >
+                            </MinecraftProjectCard>
+                        ))
+                    }
+                </div>
             </div>
         </>
     )
 }
 
-async function fetchDownloadsMap(keyFunction: (project: Project) => string, fetchFunction: (project: Project) => Promise<number>) {
+async function fetchDownloadsMap(projectList: Project[], keyFunction: (project: Project) => string, fetchFunction: (project: Project) => Promise<number>) {
     const downloadsArray = await Promise.all(
-        projects.map(async (project) => {
+        projectList.map(async (project) => {
             const downloads = await fetchFunction(project);
 
             function formatDownloads() {

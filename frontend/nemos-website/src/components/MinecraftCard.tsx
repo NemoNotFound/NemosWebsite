@@ -26,9 +26,10 @@ export default function MinecraftProjectCard(
                 <h2 className="font-bold">{title}</h2>
             </div>
 
-            <div className={"minecraft-project-card-component flex justify-center mb-4"}>
-                <div className="w-64 h-64">
+            <div className={"minecraft-project-card-component minecraft-project-image flex justify-center mb-4"}>
+                <div className="h-full w-full">
                     <img alt={title}
+                         className="block h-full w-full object-cover"
                          src={projectIcon}/>
                 </div>
             </div>

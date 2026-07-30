@@ -7,6 +7,7 @@
     --accent: #C172DA;
     --text: #151415;
     --primary-orange: #eb622b;
+    --shade-orange: #c35124;
 }
 
 @theme inline {
@@ -64,13 +65,12 @@ body {
 }
 
 .minecraft-project-card {
-    background-color: var(--background);
+    background-color: #1E1E1E;
     border: 4px solid var(--primary-orange);
     border-radius: 15px;
     padding: 15px;
     margin: 5px;
     width: 300px;
-    height: fit-content;
 }
 
 .minecraft-project-card-component {
@@ -79,6 +79,19 @@ body {
     width: 100%;
     color: white;
     padding: 10px;
+}
+
+.minecraft-project-image {
+    box-sizing: border-box;
+    width: 264px;
+    height: 264px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+
+.minecraft-project-image img {
+    border-radius: 4px;
 }
 
 .scaling:hover {
@@ -94,4 +107,39 @@ body {
 
 .read-more-button:hover {
     transition: background-color .2s ease;
+    background-color: var(--shade-orange);
+}
+
+.abandoned-projects-title {
+    color: #8f8b91;
+    font-size: 2.25rem;
+    font-weight: bold;
+    margin: 4rem 0 2rem;
+    text-align: center;
+}
+
+.abandoned-projects .minecraft-project-card {
+    background-color: #242225;
+    border-color: #706a73;
+    opacity: .8;
+}
+
+.abandoned-projects .minecraft-project-card-component {
+    border-color: #706a73;
+}
+
+.abandoned-projects .minecraft-project-image img {
+    filter: grayscale(1);
+}
+
+.abandoned-projects .minecraft-stat {
+    color: #aaa5ac;
+}
+
+.abandoned-projects .read-more-button {
+    background-color: #706a73;
+}
+
+.abandoned-projects .read-more-button:hover {
+    background-color: #58535b;
 }
