@@ -156,7 +156,12 @@ export default async function Overview() {
         (project: Project) => fetchModrinthDownloads((project.slug)),
     );
 
-    //TODO: Add projects with downloads
+    const sortByDownloads = (firstProject: Project, secondProject: Project) =>
+        (curseForgeDownloads[secondProject.curseForgeId] + modrinthDownloads[secondProject.slug])
+        - (curseForgeDownloads[firstProject.curseForgeId] + modrinthDownloads[firstProject.slug]);
+
+    const sortedProjects = [...projects].sort(sortByDownloads);
+    const sortedAbandonedProjects = [...abandonedProjects].sort(sortByDownloads);
 
     return (
         <>
@@ -165,14 +170,14 @@ export default async function Overview() {
                 <h1>Minecraft Projects</h1>
                 <div className="grid grid-cols-3 gap-5 w-fit mx-auto">
                     {
-                        projects.map(project => (
+                        sortedProjects.map(project => (
                             <MinecraftProjectCard
                                 key={project.slug}
                                 title={project.title}
                                 slug={project.slug}
                                 imagePath={project.imagePath}
-                                curseForgeDownloads={curseForgeDownloads[project.curseForgeId]}
-                                modrinthDownloads={modrinthDownloads[project.slug]}
+                                curseForgeDownloads={formatDownloads(curseForgeDownloads[project.curseForgeId])}
+                                modrinthDownloads={formatDownloads(modrinthDownloads[project.slug])}
                             >
                             </MinecraftProjectCard>
                         ))
@@ -182,14 +187,14 @@ export default async function Overview() {
                 <h2 className="abandoned-projects-title">Abandoned Projects</h2>
                 <div className="abandoned-projects grid grid-cols-3 gap-5 w-fit mx-auto">
                     {
-                        abandonedProjects.map(project => (
+                        sortedAbandonedProjects.map(project => (
                             <MinecraftProjectCard
                                 key={project.slug}
                                 title={project.title}
                                 slug={project.slug}
                                 imagePath={project.imagePath}
-                                curseForgeDownloads={curseForgeDownloads[project.curseForgeId]}
-                                modrinthDownloads={modrinthDownloads[project.slug]}
+                                curseForgeDownloads={formatDownloads(curseForgeDownloads[project.curseForgeId])}
+                                modrinthDownloads={formatDownloads(modrinthDownloads[project.slug])}
                             >
                             </MinecraftProjectCard>
                         ))
@@ -200,30 +205,30 @@ export default async function Overview() {
     )
 }
 
-async function fetchDownloadsMap(projectList: Project[], keyFunction: (project: Project) => string, fetchFunction: (project: Project) => Promise<number>) {
+async function fetchDownloadsMap(projectList: Project[], keyFunction: (project: Project) => string, fetchFunction: (project: Project) => Promise<number>): Promise<Record<string, number>> {
     const downloadsArray = await Promise.all(
         projectList.map(async (project) => {
             const downloads = await fetchFunction(project);
 
-            function formatDownloads() {
-                return floorToSignificantDigits(downloads, 3).toLocaleString(
-                    "en-US",
-                    {
-                        notation: "compact",
-                        compactDisplay: "short",
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 2,
-                    }
-                );
-            }
-
-            return {[keyFunction(project)]: formatDownloads()};
+            return {[keyFunction(project)]: downloads};
         })
     );
 
     return downloadsArray.reduce(
         (accumulator, currentValue) => ({...accumulator, ...currentValue}),
         {}
+    );
+}
+
+function formatDownloads(downloads: number) {
+    return floorToSignificantDigits(downloads, 3).toLocaleString(
+        "en-US",
+        {
+            notation: "compact",
+            compactDisplay: "short",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+        }
     );
 }
 
